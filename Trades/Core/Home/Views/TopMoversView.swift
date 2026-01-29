@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct TopMovers: View {
+    @StateObject var viewModel:HomeViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment:.leading){
+            Text("Popüler Coinler")
+                .font(.headline)
+                .fontWeight(.bold)
+            ScrollView(.horizontal){
+                HStack(spacing:16){
+                    ForEach(viewModel.topMovingCoins){ coin in
+                        TopMoversItemView(viewModel: viewModel, coin: coin)
+                    }
+                }
+            }
+        }
+        .padding()
+
     }
 }
 
 #Preview {
-    TopMovers()
+    TopMovers(viewModel: HomeViewModel())
 }
